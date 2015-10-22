@@ -50,6 +50,34 @@
           speedY: 2, //speed in Y
           w: 40, //width
           h: 40 //heght
+        },
+        {
+          x: 100, //x coordinate
+          y: 100, //y coordinate
+          speedY: 2, //speed in Y
+          w: 40, //width
+          h: 40 //heght         
+        },
+        {
+          x: 100, //x coordinate
+          y: 100, //y coordinate
+          speedY: 2, //speed in Y
+          w: 40, //width
+          h: 40 //heght         
+        },
+        {
+          x: 100, //x coordinate
+          y: 100, //y coordinate
+          speedY: 2, //speed in Y
+          w: 40, //width
+          h: 40 //heght         
+        },
+        {
+          x: 100, //x coordinate
+          y: 100, //y coordinate
+          speedY: 2, //speed in Y
+          w: 40, //width
+          h: 40 //heght         
         }];
         
         var goal = {
@@ -80,14 +108,24 @@
             //clear the canvas
             ctx.clearRect(0,0,width,height); 
             
-            ctx.fillStyle = "rgb(200,0,0)";
+            //draw the player
+            ctx.fillStyle = "rgb(150,150,0)";
             ctx.fillRect (player.x, player.y , player.w, player.h);
             
+            //draw the goal
+            ctx.fillStyle = "rgb(0,250,250)";
             ctx.fillRect (goal.x, goal.y , goal.w, goal.h);
-
+            
+            //draw the enemies
+            ctx.fillStyle = "rgb(150,150,0)";
+            for( var i=0; i<enemies.length; i++){
+                var enemy = enemies[i];
+                ctx.fillRect (enemy.x, enemy.y , enemy.w, enemy.h);
+            }
+            
             ctx.font = 'italic 40pt Calibri';
             ctx.fillStyle = "#000"; // Set color to black
-            ctx.fillText("Sup Bro!", 50, 50);   
+            ctx.fillText("Get Over Here Bro!", 50, 50);   
         }; 
         
         //check the collision between two rectangles
