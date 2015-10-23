@@ -8,6 +8,8 @@
         
         var gameLive = true;
         
+        var level = 1;
+        
         var canvas = document.getElementById('gameScene');
         
         // make canvas full screen
@@ -45,37 +47,30 @@
         
         var enemies = [
         {
-          x: 100, //x coordinate
-          y: 100, //y coordinate
-          speedY: 2, //speed in Y
-          w: 40, //width
-          h: 40 //heght
-        },
-        {
-          x: 100, //x coordinate
-          y: 100, //y coordinate
-          speedY: 2, //speed in Y
+          x: width/2 -20, //x coordinate
+          y: 440, //y coordinate
+          speedX: 2, //speed in Y
           w: 40, //width
           h: 40 //heght         
         },
         {
-          x: 100, //x coordinate
-          y: 100, //y coordinate
-          speedY: 2, //speed in Y
+          x: width/2 -20, //x coordinate
+          y: 320, //y coordinate
+          speedX: -2, //speed in Y
           w: 40, //width
           h: 40 //heght         
         },
         {
-          x: 100, //x coordinate
-          y: 100, //y coordinate
-          speedY: 2, //speed in Y
+          x: width/2 -20, //x coordinate
+          y: 200, //y coordinate
+          speedX: 3, //speed in Y
           w: 40, //width
           h: 40 //heght         
         },
         {
-          x: 100, //x coordinate
-          y: 100, //y coordinate
-          speedY: 2, //speed in Y
+          x: width/2 -20, //x coordinate
+          y: 80, //y coordinate
+          speedX: -3, //speed in Y
           w: 40, //width
           h: 40 //heght         
         }];
@@ -83,7 +78,7 @@
         var goal = {
             x:width/2 -50,
             y:10,
-            w:100,
+            w:80,
             h:50,
         };
         
@@ -93,14 +88,42 @@
 
         var update = function() {
             
+            //check win condition
             if(player.y<=10){
-                window.alert  ("DECAPITATION!!!!");
+                //increase lvl
+                level +=1;
+                //set the player back to the start
+                player.x=width/2 -25;
+                player.y=height-100;
+                
+                //set harder enemies
+                
             }
             
             //update player
             if(player.isMoving) {
               player.y = player.y - player.speed;
-            }            
+            }
+            
+            //update enemy
+            for( var i=0; i<enemies.length; i++){
+                if(checkCollision(enemies[i], player)) {
+                    //stop the game
+                    gameLive = false;
+
+                    window.alert('Game Over!');
+
+                    //reload page
+                    window.location = "";
+                }
+                
+                if(enemies[i].x < 300 || enemies[i].x > 300){
+                    enemies[i].x += enemies[i].speedX / Math.abs(enemies[i].speedX);
+                }else{
+                    
+                }
+            }
+            
         };  
         
         var draw = function() {
@@ -117,15 +140,15 @@
             ctx.fillRect (goal.x, goal.y , goal.w, goal.h);
             
             //draw the enemies
-            ctx.fillStyle = "rgb(150,150,0)";
+            ctx.fillStyle = "rgb(0,0,250)";
             for( var i=0; i<enemies.length; i++){
                 var enemy = enemies[i];
                 ctx.fillRect (enemy.x, enemy.y , enemy.w, enemy.h);
             }
             
-            ctx.font = 'italic 40pt Calibri';
+            ctx.font = 'italic 20pt Calibri';
             ctx.fillStyle = "#000"; // Set color to black
-            ctx.fillText("Get Over Here Bro!", 50, 50);   
+            ctx.fillText("Level:" + level, 10, 40);   
         }; 
         
         //check the collision between two rectangles
