@@ -49,34 +49,34 @@
         {
           x: width/2 -20, //x coordinate
           y: 440, //y coordinate
-          speedX: 2, //speed in Y
+          speedX: width * 2 / 350, //speed in Y
           w: 40, //width
           h: 40 //heght         
         },
         {
           x: width/2 -20, //x coordinate
           y: 320, //y coordinate
-          speedX: -2, //speed in Y
+          speedX: width * -2 / 350, //speed in Y
           w: 40, //width
           h: 40 //heght         
         },
         {
           x: width/2 -20, //x coordinate
           y: 200, //y coordinate
-          speedX: 3, //speed in Y
+          speedX: width * 3 / 350, //speed in Y
           w: 40, //width
           h: 40 //heght         
         },
         {
           x: width/2 -20, //x coordinate
           y: 80, //y coordinate
-          speedX: -3, //speed in Y
+          speedX: width * -2 / 350, //speed in Y
           w: 40, //width
           h: 40 //heght         
         }];
         
         var goal = {
-            x:width/2 -50,
+            x:width/2 -40,
             y:10,
             w:80,
             h:50,
@@ -97,7 +97,9 @@
                 player.y=height-100;
                 
                 //set harder enemies
-                
+                for( var v=0; v<enemies.length; v++){
+                    enemies[v].speedX += enemies[v].speedX/Math.abs(enemies[v].speedX); 
+                }
             }
             
             //update player
@@ -117,11 +119,18 @@
                     window.location = "";
                 }
                 
-                if(enemies[i].x < 300 || enemies[i].x > 300){
-                    enemies[i].x += enemies[i].speedX / Math.abs(enemies[i].speedX);
-                }else{
-                    
+                //move enemy
+                enemies[i].x += enemies[i].speedX;
+                
+                if(enemies[i].x < 10) {
+                    enemies[i].x = 11;
+                    enemies[i].speedX *= -1;
                 }
+                if(enemies[i].x > width-50) {
+                    enemies[i].x =  width-49;
+                    enemies[i].speedX *= -1;
+                }
+                
             }
             
         };  
