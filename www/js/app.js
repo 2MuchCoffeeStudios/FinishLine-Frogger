@@ -8,6 +8,8 @@
         
         var gameLive = true;
         
+        var sprites = {};
+        
         var level = 1;
         
         var canvas = document.getElementById('gameScene');
@@ -25,7 +27,7 @@
         var player = {
             x:width/2 -25,
             y:height-100,
-            w:50,
+            w:23,
             h:50,
             speed:2.5,
             isMoving: false
@@ -50,40 +52,50 @@
           x: width/2 -20, //x coordinate
           y: 440, //y coordinate
           speedX: width * 2 / 350, //speed in Y
-          w: 40, //width
+          w: 28, //width
           h: 40 //heght         
         },
         {
           x: width/2 -20, //x coordinate
           y: 320, //y coordinate
           speedX: width * -2 / 350, //speed in Y
-          w: 40, //width
+          w: 28, //width
           h: 40 //heght         
         },
         {
           x: width/2 -20, //x coordinate
           y: 200, //y coordinate
           speedX: width * 3 / 350, //speed in Y
-          w: 40, //width
+          w: 28, //width
           h: 40 //heght         
         },
         {
           x: width/2 -20, //x coordinate
           y: 80, //y coordinate
           speedX: width * -2 / 350, //speed in Y
-          w: 40, //width
+          w: 28, //width
           h: 40 //heght         
         }];
         
         var goal = {
             x:width/2 -40,
             y:10,
-            w:80,
+            w:28,
             h:50,
         };
         
         var load = function() {
+            sprites.player = new Image();
+            sprites.player.src = 'asset/images/car.png';
 
+            sprites.background = new Image();
+            sprites.background.src = 'asset/images/road.png';
+
+            sprites.enemy = new Image();
+            sprites.enemy.src = 'asset/images/pine.png';
+
+            sprites.goal = new Image();
+            sprites.goal.src = 'asset/images/garage.png';
         };  
 
         var update = function() {
@@ -138,9 +150,23 @@
         var draw = function() {
             
             //clear the canvas
-            ctx.clearRect(0,0,width,height); 
+            ctx.clearRect(0,0,width,height);    
+
+            //draw background
+            ctx.drawImage(sprites.background, 0, 0);
+
+            //draw player
+            ctx.drawImage(sprites.player, player.x, player.y);
+
+            //draw enemies
+            enemies.forEach(function(element, index){
+              ctx.drawImage(sprites.enemy, element.x, element.y);
+            });
+
+            //draw goal
+            ctx.drawImage(sprites.goal, goal.x, goal.y);
             
-            //draw the player
+            /*//draw the player
             ctx.fillStyle = "rgb(150,150,0)";
             ctx.fillRect (player.x, player.y , player.w, player.h);
             
@@ -153,10 +179,10 @@
             for( var i=0; i<enemies.length; i++){
                 var enemy = enemies[i];
                 ctx.fillRect (enemy.x, enemy.y , enemy.w, enemy.h);
-            }
+            }*/
             
             ctx.font = 'italic 20pt Calibri';
-            ctx.fillStyle = "#000"; // Set color to black
+            ctx.fillStyle = "#FFFFFF"; // Set color to black
             ctx.fillText("Level:" + level, 10, 40);   
         }; 
         
