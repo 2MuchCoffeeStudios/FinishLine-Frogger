@@ -15,8 +15,10 @@
         var canvas = document.getElementById('gameScene');
         
         // make canvas full screen
-        var width = screen.availWidth;
-        var height = screen.availHeight;
+        //var width = screen.availWidth;
+        //var height = screen.availHeight;
+        var width = 384;
+        var height = 640;
         canvas.width = width;
         canvas.height = height;
         
@@ -27,8 +29,8 @@
         var player = {
             x:width/2 -25,
             y:height-100,
-            w:23,
-            h:50,
+            w:20,
+            h:45,
             speed:2.5,
             isMoving: false
         }; 
@@ -52,29 +54,29 @@
           x: width/2 -20, //x coordinate
           y: 440, //y coordinate
           speedX: width * 2 / 350, //speed in Y
-          w: 28, //width
-          h: 40 //heght         
+          w: 20, //width
+          h: 38 //heght         
         },
         {
           x: width/2 -20, //x coordinate
           y: 320, //y coordinate
           speedX: width * -2 / 350, //speed in Y
-          w: 28, //width
-          h: 40 //heght         
+          w: 20, //width
+          h: 38 //heght         
         },
         {
           x: width/2 -20, //x coordinate
           y: 200, //y coordinate
           speedX: width * 3 / 350, //speed in Y
-          w: 28, //width
-          h: 40 //heght         
+          w: 20, //width
+          h: 38 //heght         
         },
         {
           x: width/2 -20, //x coordinate
           y: 80, //y coordinate
           speedX: width * -2 / 350, //speed in Y
-          w: 28, //width
-          h: 40 //heght         
+          w: 20, //width
+          h: 38 //heght         
         }];
         
         var goal = {
